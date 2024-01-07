@@ -6,7 +6,7 @@ class Building
     private List<Elevator> elevators;
     private Person person;
     private int numFloors;
-
+    
     public Building(int numFloors, int numElevators)
     {
         this.numFloors = numFloors;
