@@ -3,43 +3,43 @@
 
 class Building
 {
-    private List<Elevator> elevators;
-    private Person person;
+    private List<IElevator> elevators;
+    private PersonManager personManager;
     private int numFloors;
     private IElevatorFactory elevatorFactory;
-    
+
     public Building(int numFloors, IElevatorFactory elevatorFactory)
     {
         this.numFloors = numFloors;
-        this.elevators = new List<Elevator>();
-        for(int i = 0; i < 2; i++)
+        this.elevators = new List<IElevator>();
+        for (int i = 0; i < 2; i++)
         {
             this.elevators.Add(elevatorFactory.CreateElevator(numFloors));
         }
-        this.person = new Person();
-        this.elevatorFactory = new elevatorFactory;
+        this.personManager = new PersonManager();
+        this.elevatorFactory = elevatorFactory;
     }
 
     public void AddPerson(int startFloor, int endFloor)
     {
-        this.person.AddPerson(startFloor,endFloor);
+        this.personManager.AddPerson(startFloor, endFloor);
     }
 
     public bool HasPeople()
     {
-        return.this.person.HasPeople();
+        return this.personManager.HasPeople();
     }
 
     public void Update()
     {
-        //Update each elevator
-        foreach(IElevator elevator in this.elevators)
+        // Update each elevator
+        foreach (IElevator elevator in this.elevators)
         {
             elevator.Update();
         }
 
-        //Assign people to elevators
-        foreach(Person person in this.person.GetPeople())
+        // Assign people to elevators
+        foreach (Person person in this.personManager.GetPeople())
         {
             IElevator closestElevator = null;
             int closestDistance = int.MaxValue;
@@ -55,6 +55,5 @@ class Building
             closestElevator.AddPerson(person);
             this.personManager.RemovePerson(person);
         }
-
     }
 }

@@ -1,35 +1,27 @@
-//The Person class is responsible for managing a list of people. 
-//It has methods to add a person to the list, check if there are people in the list, and remove a person from the list.
+
 class Person
 {
-    //List of people
-    private List<Person> people;
+   private int startFloor;
+    private int destinationFloor;
 
-    public Person()
+    public Person(int startFloor, int destinationFloor)
     {
-        this.people = new List<Person>();
+        this.startFloor = startFloor;
+        this.destinationFloor = destinationFloor;
     }
 
-    //Adding people
-    public void AddPerson(int startFloor, int endFloor)
+    public int CurrentFloor
     {
-        this.people.Add(new Person(startFloor,endFloor));
+        get { return this.startFloor; }
     }
 
-
-    public bool HasPeople()
+    public int DestinationFloor
     {
-        return this.people.Count > 0;
+        get { return this.destinationFloor; }
     }
 
-    public List<Person> GetPeople()
+    public bool HasReachedDestination()
     {
-        return this.people;
-    }
-
-    //Removing people from the list
-    public void RemovePerson(Person person)
-    {
-        this.people.Remove(person);
-    }
+        return this.startFloor
+    }    
 }

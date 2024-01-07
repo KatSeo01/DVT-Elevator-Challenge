@@ -1,13 +1,4 @@
 //The Elevator class implements the IElevator interface. It has private fields for the number of floors, current floor, direction, and list of people in the elevator. 
-//The IElevator interface defines three methods: CurrentFloor, AddPerson, and Update
-interface IElevator
-{
-    int CurrentFloor {get; }
-    void AddPerson(Person person);
-    void Update();
-}
-
-
 class Elevator : IElevator
 {
     private int numFloors;
