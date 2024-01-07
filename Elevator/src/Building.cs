@@ -6,16 +6,18 @@ class Building
     private List<Elevator> elevators;
     private Person person;
     private int numFloors;
+    private IElevatorFactory elevatorFactory;
     
-    public Building(int numFloors, int numElevators)
+    public Building(int numFloors, IElevatorFactory elevatorFactory)
     {
         this.numFloors = numFloors;
         this.elevators = new List<Elevator>();
-        for(int i = 0; i < numElevators; i++)
+        for(int i = 0; i < 2; i++)
         {
-            this.elevators.Add(new Elevator(numFloors));
+            this.elevators.Add(elevatorFactory.CreateElevator(numFloors));
         }
         this.person = new Person();
+        this.elevatorFactory = new elevatorFactory;
     }
 
     public void AddPerson(int startFloor, int endFloor)
@@ -31,7 +33,7 @@ class Building
     public void Update()
     {
         //Update each elevator
-        foreach(Elevator elevator in this.elevators)
+        foreach(IElevator elevator in this.elevators)
         {
             elevator.Update();
         }
@@ -39,9 +41,9 @@ class Building
         //Assign people to elevators
         foreach(Person person in this.person.GetPeople())
         {
-            Elevator closestElevator = null;
+            IElevator closestElevator = null;
             int closestDistance = int.MaxValue;
-            foreach (Elevator elevator in this.elevators)
+            foreach (IElevator elevator in this.elevators)
             {
                 int distance = Math.Abs(elevator.CurrentFloor - person.CurrentFloor);
                 if (distance < closestDistance)
