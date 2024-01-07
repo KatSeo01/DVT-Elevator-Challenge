@@ -16,10 +16,15 @@ class Person
         this.people.Add(new Person(startFloor,endFloor));
     }
 
-    //Checking if we have people
+
     public bool HasPeople()
     {
         return this.people.Count > 0;
+    }
+
+    public List<Person> GetPeople()
+    {
+        return this.people;
     }
 
     //Removing people from the list
