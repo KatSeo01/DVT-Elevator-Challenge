@@ -6,7 +6,6 @@ and maintainability.
 The console applicaƟon must include the following key features:
 
 1. Real-Time Elevator Status
-
 Display the real-time status of each elevator, including its current floor, direction of movement,
 whether it's in motion or stationary, and the number of passengers it is carrying.
 
