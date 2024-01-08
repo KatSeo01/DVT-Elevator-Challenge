@@ -1,31 +1,33 @@
-//The Person class is responsible for managing a list of people. 
-//It has methods to add a person to the list, check if there are people in the list, and remove a person from the list.
+//The Person class is responsible for managing a list of people or passengers.
 class PersonManager
 {
-    private List<Person> people;
+    private List<IPassenger> passengers; // Stores a list of passengers
 
     public PersonManager()
     {
-        this.people = new List<Person>();
+        this.passengers = new List<IPassenger>(); // Initializes the passenger list
     }
 
-    public void AddPerson(int startFloor, int endFloor)
+    public void AddPerson(int startFloor, int endFloor, int numPassengers)
     {
-        this.people.Add(new Person(startFloor, endFloor));
+        foreach (var _ in Enumerable.Range(0, numPassengers))
+        {
+            this.passengers.Add(new Person(startFloor, endFloor)); // Adds multiple passengers with the same start and end floors
+        }
     }
 
     public bool HasPeople()
     {
-        return this.people.Count > 0;
+        return this.passengers.Count > 0; // Checks if there are any passengers waiting
     }
 
-    public List<Person> GetPeople()
+    public List<IPassenger> GetPeople()
     {
-        return this.people;
+        return this.passengers.ToList(); // Returns a copy of the passenger list
     }
 
-    public void RemovePerson(Person person)
+    public void RemovePerson(IPassenger passenger)
     {
-        this.people.Remove(person);
+        this.passengers.Remove(passenger); // Removes a specific passenger from the list
     }
 }
