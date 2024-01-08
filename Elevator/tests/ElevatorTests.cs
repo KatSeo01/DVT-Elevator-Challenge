@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System;
+
 [TestClass]
 public class ElevatorTest
 {
