@@ -1,10 +1,10 @@
 //The Elevator class implements the IElevator interface. It has private fields for the number of floors, current floor, direction, and list of people in the elevator. 
 class Elevator : IElevator
 {
-    private int numFloors;
-    private int currentFloor;
-    private int direction;
-    private List<Person> people;
+    private int numFloors; // Total number of floors in the building
+    private int currentFloor; // Current floor of the elevator
+    private int direction; // Direction of movement (1 for up, -1 for down, 0 for idle)
+    private List<Person> people; // People currently in the elevator
 
     public Elevator(int numFloors)
     {
@@ -21,13 +21,16 @@ class Elevator : IElevator
 
     public void AddPerson(Person person)
     {
-        this.people.Add(person);
+        this.people.Add(person); // Adds a person to the elevator
     }
 
-    public void Update()
+    public async Task MoveToFloorAsync(int targetFloor)
     {
-        // Move the elevator
-        this.currentFloor += this.direction;
+        while (this.currentFloor != targetFloor)
+        {
+            this.currentFloor += this.direction; // Move one floor in the current direction
+            await Task.Delay(100); // Simulate async movement
+        }
 
         // Change direction if necessary
         if (this.currentFloor == 1)
@@ -36,7 +39,7 @@ class Elevator : IElevator
         }
         else if (this.currentFloor == this.numFloors)
         {
-            this.direction = -1;
+            this.direction = -1; // Start moving down
         }
 
         // Remove people who have reached their destination
