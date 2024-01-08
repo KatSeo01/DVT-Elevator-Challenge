@@ -1,7 +1,6 @@
-//The IElevator interface defines three methods: CurrentFloor, AddPerson, and Update
+//The IElevator interface defines methods: CurrentFloor, and AddPerson
 interface IElevator
-    {
-        int CurrentFloor { get; }
-        void AddPerson(Person person);
-        void Update();
-    }
+{
+    int CurrentFloor { get; }
+    void AddPerson(Person person);
+}
