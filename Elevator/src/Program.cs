@@ -9,23 +9,56 @@ namespace ElevatorChallenge
     {
         static async Task Main(string[] args)
         {
-            // Create a building with 10 floors and 2 elevators
-            Building building = new Building(10, new ElevatorFactory());
+            var elevatorSystem = new ElevatorSystem(numElevators: 3, numFloors: 10);
 
-            // Add some people to the building
-            building.AddPerson(1, 5, 1);
-            building.AddPerson(2, 3, 2);
-            building.AddPerson(3, 7, 3);
-            building.AddPerson(4, 2, 1);
-            building.AddPerson(5, 8, 2);
+            Console.WriteLine("Welcome to the Elevator System!");
 
-            // Run the simulation
-            await building.RequestElevatorAsync(1, 9, 1);
-
-            while (building.HasPeople())
+            while (true)
             {
-                building.Update();
-                await Task.Delay(500); // Introduce delay for better visualization
+                Console.WriteLine("Options:");
+                Console.WriteLine("1. Request Elevator");
+                Console.WriteLine("2. Display Elevator Status");
+                Console.WriteLine("3. Exit");
+
+                Console.Write("Enter your choice (1/2/3): ");
+                var choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        RequestElevator(elevatorSystem);
+                        break;
+                    case "2":
+                        elevatorSystem.DisplayElevatorStatus();
+                        break;
+                    case "3":
+                        Console.WriteLine("Exiting the Elevator System. Goodbye!");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please enter 1, 2, or 3.");
+                        break;
+                }
+            }
+        }
+
+        static void RequestElevator(ElevatorSystem elevatorSystem)
+        {
+            try
+            {
+                Console.Write("Enter current floor: ");
+                int fromFloor = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter destination floor: ");
+                int toFloor = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter the number of passengers: ");
+                int numPassengers = int.Parse(Console.ReadLine());
+
+                elevatorSystem.RequestElevatorAsync(fromFloor, toFloor, numPassengers).Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
     }
