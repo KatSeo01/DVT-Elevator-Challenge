@@ -12,7 +12,8 @@ class PersonManager
     {
         foreach (var _ in Enumerable.Range(0, numPassengers))
         {
-            this.passengers.Add(new Person(startFloor, endFloor)); // Adds multiple passengers with the same start and end floors
+            this.passengers.Add(new Person(startFloor, endFloor));// Adding passengers on the same floor
+            Console.WriteLine($"Added {numPassengers} passengers to the building.");
         }
     }
 
